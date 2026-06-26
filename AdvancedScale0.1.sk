@@ -1,0 +1,42 @@
+#Advanced Scale
+#Wiki - wiki.advancedskripts.run.place/scale
+
+#Config
+
+#Minimum Size
+set {AdvancedScale::Minimumsize} to 0.5 #Default MC size is 1
+
+#Max Size
+set {AdvancedScale::Maxsize} to 5 #The Minecraft Maximum is 20
+
+#Prefix
+set {AdvancedScale::Prefix} to &6&l[AdvancedScale]
+
+
+
+
+
+#DONT EDIT ANYTHING FROM HERE
+
+
+on load:
+	send "%{AdvancedScale::Prefix}%&r: Reloaded Advanced Scale Sucessfully!" to %{AdvancedScale::PlayerReloadingskript}%
+	send "%{AdvancedScale::Prefix}%&r: Reloaded Advanced Scale Sucessfully!" to console
+
+command /advancedscale:reload:
+	permission: advancedskripts.scale.reload
+	aliases: scaleadmin reload
+	trigger:
+		set {AdvancedScale::PlayerReloadingskript} to %player%
+		send "%{AdvancedScale::Prefix}%&r: Reloading Advanced Scale. If you dont recieve a message within 5 seconds check console."
+		execute console command "sk reload AdvancedScale0.1.sk"
+
+
+command /advancedscale:scale <number>:
+	permission: advancedskripts.scale.size
+	aliases: scale
+	trigger:
+		send "%{AdvancedScale::Prefix}%&r: Successfully set your size to %arg-1%."
+		execute console command "attribute %player% minecraft:generic.scale base set %arg-1%"
+
+
